@@ -32,14 +32,14 @@ libraryDependencies += Seq(
 Type `sbt console` to start a REPL and then paste the following the following code:
 
 ```scala
-import io.protoless._, io.protoless.generic.auto._
+import io.protoless._, io.protoless.generic.auto._, io.protoless.messages._
 
 case class Person(firstname: String, lastname: String, age: Option[Int], locations: Seq[String])
 
 val p = Person("John", "Doe", Some(28), Seq("Paris", "London", "New York"))
 // p: Person = Right(Person(John, Doe, Some(28), Seq(Paris, London, New York)
 
-val byte = Encoder[Person].encode(p) // or p.asProtobufBytes
+val bytes = Encoder[Person].encodeAsBytes(p) // or p.asProtobufBytes
 // bytes: Array[Byte] = Array(10, 4, 74, 111, 104, 110, 18, ...)
 
 Decoder[Person].decode(bytes) // or bytes.as[Person]
